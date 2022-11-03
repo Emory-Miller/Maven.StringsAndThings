@@ -46,17 +46,7 @@ public class StringsAndThings {
         }
         return newString;
     }
-//        char[] array = base.toCharArray();
-//        char removeChar = remove.charAt(0);
-//        String newString = "";
-//        for (Character each : array ){
-//            int compareToRemove = Character.compare(each, removeChar);
-//            if ( compareToRemove != 0) {
-//                newString += each.toString();
-//            }
-//        }
-//        return newString;
-//    }
+
 
     /**
      * Given a string, return true if the number of appearances of "is" anywhere in the string is equal
@@ -67,23 +57,19 @@ public class StringsAndThings {
      * containsEqualNumberOfIsAndNot("noisxxnotyynotxisi") // Should return true
      */
     public Boolean containsEqualNumberOfIsAndNot(String input) {
-        Integer countNot = 0;
-        Integer countIs = 0;
-        String[] arrayIs = input.split("is");
-        System.out.println(arrayIs);
-        String[] arrayNot = input.split("not");
-        System.out.println(arrayNot);
-        for (String each : arrayIs) {
-            if (each.equals("is")) {
-                countIs++;
+        String newString = input.replace("is", "1");
+        String newstring2 = newString.replace("not", "2");
+        int isCount = 0;
+        int notCount = 0;
+        char[] array = newstring2.toCharArray();
+        for (Character each : array){
+            if (each.equals('1')) {
+                isCount++;
+            } else if (each.equals('2')) {
+                notCount++;
             }
         }
-        for (String each : arrayNot) {
-            if (each.equals("not")) {
-                countNot++;
-            }
-        }
-        return ( countNot != countIs);
+        return (isCount == notCount);
     }
 
     /**
@@ -94,7 +80,19 @@ public class StringsAndThings {
      * gHappy("xxggyygxx") // Should return  false
      */
     public Boolean gIsHappy(String input) {
-        return null;
+        String newString = input.replace("gg", "1");
+        String newString2 = newString.replace("g", "2");
+        int happyCount = 0;
+        int unhappyCount = 0;
+        char[] array = newString2.toCharArray();
+        for (Character each : array) {
+            if (each.equals('1')) {
+                happyCount++;
+            } else if (each.equals('2')) {
+                unhappyCount++;
+            }
+        }
+        return ((happyCount > 0) && (unhappyCount == 0));
     }
 
 
@@ -106,8 +104,15 @@ public class StringsAndThings {
      * countTriple("a") // Should return 0
      */
     public Integer countTriple(String input) {
-        return null;
+        int count = 0;
+        char[] array = input.toCharArray();
+        for (int i = 0; i < array.length - 3; i++) {
+            int compare1 = Character.compare(array[i], array[i + 1]);
+            int compare2 = Character.compare(array[i], array[i + 2]);
+            if ((compare1 == 0) && (compare2 == 0)) {
+                count++;
+            }
+        }
+        return count;
     }
 }
-
-//                each.substring(0, each.length()-1);
